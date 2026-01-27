@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Claude Code
+.claude/settings.local.json
+# But keep plugin config and installed skills
+# .claude/settings.json should be tracked for shared configuration

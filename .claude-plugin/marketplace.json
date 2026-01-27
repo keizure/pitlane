@@ -1,0 +1,20 @@
+{
+  "name": "pitlane",
+  "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
+  "owner": {
+    "name": "keizure",
+    "email": "woodfrz@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "pitlane",
+      "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
+      "version": "0.0.1",
+      "source": "./",
+      "owner": {
+        "name": "keizure",
+        "email": "woodfrz@gmail.com"
+      }
+    }
+  ]
+}

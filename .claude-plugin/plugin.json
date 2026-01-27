@@ -1,0 +1,16 @@
+{
+  "name": "pitlane",
+  "version": "0.1.0",
+  "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
+  "author": {
+    "name": "keizure",
+    "email": "woodfrz@gmail.com"
+  },
+  "repository": "https://github.com/keizure/pitlane",
+  "homepage": "https://github.com/keizure/pitlane",
+  "skills": [
+    "release-tag"
+  ],
+  "dependencies": [],
+  "license": "MIT"
+}
