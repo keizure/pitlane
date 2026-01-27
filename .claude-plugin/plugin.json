@@ -8,9 +8,10 @@
   },
   "repository": "https://github.com/keizure/pitlane",
   "homepage": "https://github.com/keizure/pitlane",
-  "skills": [
-    "release-tag"
-  ],
-  "dependencies": [],
+  "skills": {
+    "release-tag": {
+      "path": "skills/release-tag/SKILL.md"
+    }
+  },
   "license": "MIT"
 }
