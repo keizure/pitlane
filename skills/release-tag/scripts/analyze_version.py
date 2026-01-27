@@ -9,9 +9,6 @@ import argparse
 import subprocess
 import sys
 import re
-import json
-import os
-import tempfile
 from typing import Tuple, List, Dict, Optional
 from enum import Enum
 from pathlib import Path
