@@ -1,6 +1,6 @@
 ---
 name: release-tag
-description: "Intelligent semantic versioning and git tag creation with automatic version bump detection. Analyzes git commits and diffs to generate major.minor.patch version numbers and comprehensive tag descriptions. Use when: (1) Creating release tags, (2) Publishing new versions, (3) Automating version management, (4) Generating release notes. Triggers: 'release tag', 'create tag', 'release version', '打tag', '发布版本', 'create release', 'bump version'. When commits lack clear keywords, outputs diff for Claude to analyze and decide version type."
+description: "Intelligent semantic versioning and git tag creation with automatic version bump detection. Use when: (1) Creating release tags, (2) Publishing new versions, (3) Automating version management, (4) Generating release notes. Triggers: 'release tag', 'create tag', 'release version', '打tag', '发布版本', 'create release', 'bump version'."
 ---
 
 # Semantic Release
