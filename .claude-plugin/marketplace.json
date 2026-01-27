@@ -9,7 +9,7 @@
     {
       "name": "pitlane",
       "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
-      "version": "0.0.1",
+      "version": "0.1.0",
       "source": "./",
       "author": {
         "name": "keizure",
