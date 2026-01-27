@@ -8,7 +8,5 @@
   },
   "repository": "https://github.com/keizure/pitlane",
   "homepage": "https://github.com/keizure/pitlane",
-  "skills": "./skills",
-  "commands": "./commands",
   "license": "MIT"
 }
