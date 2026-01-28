@@ -24,7 +24,7 @@ vMAJOR.MINOR.PATCH
 **Commit 特征：**
 - `feat!:` 或 `fix!:`
 - 包含 `BREAKING CHANGE:` footer
-- 关键词: "remove", "rename", "refactor API", "incompatible"
+- 关键词: "remove", "rename", "refactor API", "incompatible" (仅作为辅助判断)
 
 **示例版本变化：**
 - `v1.9.5` → `v2.0.0`
