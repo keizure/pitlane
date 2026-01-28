@@ -16,7 +16,7 @@
         "url": "https://github.com/keizure/pitlane.git"
       },
       "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "strict": true
     }
   ]
