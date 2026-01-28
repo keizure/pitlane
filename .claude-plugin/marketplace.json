@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
