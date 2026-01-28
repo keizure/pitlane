@@ -110,22 +110,32 @@ Then bump:
 See [version-strategy.md](references/version-strategy.md) for semantic versioning rules and decision examples
 
 ### Step 6 — Draft Release Notes (preview)
-Write a markdown draft using this strict structure:
+Please write the Release Notes in **Markdown** using the **exact structure** shown below. You **must** satisfy all hard constraints; otherwise, you must **rewrite** until they are satisfied.
+
+**Hard constraints (failure if any is not met):**
+1) The output must follow the exact section headings and order: **Overview**, **Highlights**, **Upgrade / Behavior Notes**, **Quick Start (optional)**.
+2) **Overview** must be **1–2 sentences** of objective, natural-language summary. Do **not** paste or paraphrase commit messages.
+3) **Highlights** must contain **at least 2 bullet points**. Each bullet must describe **user impact and/or behavior change** (or internal maintenance impact if no user-visible changes). Bullets must **not** start with `feat:`, `fix:`, `chore:`, `docs:`, `refactor:` (or similar).
+4) If there are **no user-visible changes**, you must include the exact sentence in **Overview**: **“No user-visible changes; internal maintenance only.”** and use **Highlights** to describe the internal maintenance work.
+5) Do **not** include signature lines such as “Generated with …”.
+6) **No emotional or subjective language**: avoid praise, opinions, hype, or qualitative adjectives (e.g., “great”, “awesome”, “excellent”, “huge”, “significant”). Use factual, verifiable statements only.
+7) Output **only** the final Markdown. Do not include any explanations, reasoning, JSON, or extra text.
+
+Use this template (fill in placeholders, keep headings exactly as-is):
 
 ```md
 Release {NEW_VERSION}
 
 ## Overview
-- <1-2 sentences: what changed and why it matters>
+<1-2 sentences. Objective summary. If no user-visible changes, include: "No user-visible changes; internal maintenance only.">
 
 ## Highlights
-- <2-6 bullets: user-visible changes, grouped>
+- <bullet 1>
+- <bullet 2>
 
 ## Upgrade / Behavior Notes
-- <only if needed: breaking changes, migration steps, defaults changed>
+- <only if needed; otherwise write "- None.">
 
-## Quick Start (optional)
-- <only if this release introduces new command/skill/config>
 ```
 
 **Constraints**

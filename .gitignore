@@ -212,7 +212,8 @@ __marimo__/
 # .claude/settings.json should be tracked for shared configuration
 
 # Test temporary files
-tests/.temp/
-tests/fixtures/*/.git/
-tests/fixtures/*/src/
-tests/fixtures/*/node_modules/
+tests/**/.temp/
+tests/**/fixtures/**/.git/
+tests/**/fixtures/**/src/
+tests/**/fixtures/**/node_modules/
+tests/**/fixtures/**/tests/
