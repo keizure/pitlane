@@ -40,6 +40,36 @@ Intelligent semantic versioning and git tag creation with automatic version bump
 
 See [skills/release-tag/SKILL.md](skills/release-tag/SKILL.md) for detailed documentation.
 
+## Development
+
+### Testing
+
+This project includes comprehensive tests to ensure quality.
+
+```bash
+# Run all tests
+cd tests
+./run_tests.sh
+
+# Run integration tests
+./tests/integration/test_release_tag.sh
+
+# Set up manual test fixtures
+cd tests/fixtures/basic
+./setup.sh
+# Now test the skill in Claude Code
+```
+
+See [tests/README.md](tests/README.md) for detailed testing documentation and [VALIDATION.md](VALIDATION.md) for quick validation guide.
+
+### Contributing
+
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+- Development setup
+- Making changes
+- Testing requirements
+- Pull request process
+
 ---
 
 ## License

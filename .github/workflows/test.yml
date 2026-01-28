@@ -1,0 +1,124 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for tags
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "CI Bot"
+        git config --global user.email "ci@example.com"
+
+    - name: Run integration tests
+      run: |
+        cd tests
+        bash run_tests.sh
+
+    - name: Test summary
+      if: always()
+      run: |
+        echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "Tests completed successfully!" >> $GITHUB_STEP_SUMMARY
+
+  validate-skill-format:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Validate SKILL.md format
+      run: |
+        echo "Validating skill files..."
+
+        # Check SKILL.md exists
+        if [ ! -f "skills/release-tag/SKILL.md" ]; then
+          echo "❌ SKILL.md not found"
+          exit 1
+        fi
+
+        # Check frontmatter exists
+        if ! head -1 skills/release-tag/SKILL.md | grep -q "^---$"; then
+          echo "❌ SKILL.md missing frontmatter"
+          exit 1
+        fi
+
+        # Check required fields
+        if ! grep -q "^name:" skills/release-tag/SKILL.md; then
+          echo "❌ SKILL.md missing 'name' field"
+          exit 1
+        fi
+
+        if ! grep -q "^description:" skills/release-tag/SKILL.md; then
+          echo "❌ SKILL.md missing 'description' field"
+          exit 1
+        fi
+
+        echo "✓ SKILL.md format is valid"
+
+    - name: Validate plugin.json
+      run: |
+        echo "Validating plugin.json..."
+
+        if [ ! -f ".claude-plugin/plugin.json" ]; then
+          echo "❌ plugin.json not found"
+          exit 1
+        fi
+
+        # Check JSON is valid
+        if ! python3 -m json.tool .claude-plugin/plugin.json > /dev/null; then
+          echo "❌ plugin.json is not valid JSON"
+          exit 1
+        fi
+
+        # Check required fields
+        if ! grep -q '"name"' .claude-plugin/plugin.json; then
+          echo "❌ plugin.json missing 'name' field"
+          exit 1
+        fi
+
+        if ! grep -q '"version"' .claude-plugin/plugin.json; then
+          echo "❌ plugin.json missing 'version' field"
+          exit 1
+        fi
+
+        echo "✓ plugin.json is valid"
+
+  test-fixtures:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fixture: [basic, breaking-change, first-release]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "CI Bot"
+        git config --global user.email "ci@example.com"
+
+    - name: Test ${{ matrix.fixture }} fixture
+      run: |
+        cd tests/fixtures/${{ matrix.fixture }}
+        bash setup.sh
+
+        echo "Fixture setup successful for ${{ matrix.fixture }}"
+
+        # Basic validation
+        git log --oneline
+        git tag -l

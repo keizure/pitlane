@@ -210,3 +210,9 @@ __marimo__/
 .claude
 # But keep plugin config and installed skills
 # .claude/settings.json should be tracked for shared configuration
+
+# Test temporary files
+tests/.temp/
+tests/fixtures/*/.git/
+tests/fixtures/*/src/
+tests/fixtures/*/node_modules/
