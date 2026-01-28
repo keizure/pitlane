@@ -134,10 +134,6 @@ Release {NEW_VERSION}
 ## Highlights
 - <bullet 1>
 - <bullet 2>
-
-## Upgrade / Behavior Notes
-- <only if needed; otherwise write "- None.">
-
 ```
 
 **Constraints**
@@ -155,17 +151,10 @@ At the end of Phase 1, present:
 ## Phase 2 — Create & Push Tag (TAG CREATED HERE)
 
 ### Step 1 — Create annotated tag
-Use one of the following methods:
+Do **not** remove `--cleanup=verbatim`
 
-#### Method A (editor)
 ```bash
-git tag -a <NEW_VERSION>
-# paste the release notes, save and exit
-```
-
-#### Method B (heredoc; recommended for automation)
-```bash
-git tag -a <NEW_VERSION> -F - <<'EOF'
+git tag -a <NEW_VERSION> --cleanup=verbatim -F - <<'EOF'
 <PASTE FINAL RELEASE NOTES MARKDOWN HERE>
 EOF
 ```
