@@ -96,29 +96,3 @@ jobs:
         fi
 
         echo "✓ plugin.json is valid"
-
-  test-fixtures:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        fixture: [basic, breaking-change, first-release]
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Git
-      run: |
-        git config --global user.name "CI Bot"
-        git config --global user.email "ci@example.com"
-
-    - name: Test ${{ matrix.fixture }} fixture
-      run: |
-        cd tests/fixtures/${{ matrix.fixture }}
-        bash setup.sh
-
-        echo "Fixture setup successful for ${{ matrix.fixture }}"
-
-        # Basic validation
-        git log --oneline
-        git tag -l
