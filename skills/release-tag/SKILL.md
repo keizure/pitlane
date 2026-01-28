@@ -121,6 +121,7 @@ Please write the Release Notes in **Markdown** using the **exact structure** sho
 5) Do **not** include signature lines such as “Generated with …”.
 6) **No emotional or subjective language**: avoid praise, opinions, hype, or qualitative adjectives (e.g., “great”, “awesome”, “excellent”, “huge”, “significant”). Use factual, verifiable statements only.
 7) Output **only** the final Markdown. Do not include any explanations, reasoning, JSON, or extra text.
+8) **No attribution to AI or assistance**: Do **not** mention Claude/AI/LLM or any wording that implies the release notes were generated or assisted by an AI (e.g., “generated with Claude”, “written by AI”, “AI-assisted”, “drafted by Claude Code”).
 
 Use this template (fill in placeholders, keep headings exactly as-is):
 
@@ -187,6 +188,7 @@ git push origin <NEW_VERSION>
 - ❌ Writing release notes by copying commit subjects verbatim
 - ❌ Force pushing tags
 - ❌ Describing features not present in commits/diff
+- ❌ No attribution to AI or assistance in release note
 
 ---
 
