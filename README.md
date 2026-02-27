@@ -40,6 +40,29 @@ Intelligent semantic versioning and git tag creation with automatic version bump
 
 See [skills/release-tag/SKILL.md](skills/release-tag/SKILL.md) for detailed documentation.
 
+### `personal-plan`
+Personal information capture and daily planning system based on .plan file format.
+
+**Usage:**
+```bash
+# Use in Claude Code by typing:
+/personal-plan
+
+# Or mention it in conversation:
+"记下来：今天完成了翻译系统"
+"今天做了什么"
+"查看我的 plan"
+```
+
+**Features:**
+- Simple .plan file format (inspired by John Carmack's workflow)
+- Daily work logging with minimal syntax
+- Quick idea capture without context switching
+- Project tagging and progress tracking
+- Review and planning helpers
+
+See [skills/personal-plan/SKILL.md](skills/personal-plan/SKILL.md) for detailed documentation.
+
 ## Development
 
 ### Testing
