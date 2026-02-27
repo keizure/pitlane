@@ -32,16 +32,6 @@ Intelligent semantic versioning and git tag creation with automatic version bump
 "Please help me create a release tag"
 ```
 
-### `polish-commit`
-
-**Features:**
-- Automatic version detection (major/minor/patch)
-- Conventional Commits parsing
-- Two-phase workflow with quality release notes
-- Git tag creation and pushing
-
-See [skills/release-tag/SKILL.md](skills/release-tag/SKILL.md) for detailed documentation.
-
 ### `personal-plan`
 Personal information capture and daily planning system based on .plan file format.
 
