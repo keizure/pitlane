@@ -32,6 +32,8 @@ Intelligent semantic versioning and git tag creation with automatic version bump
 "Please help me create a release tag"
 ```
 
+### `polish-commit`
+
 **Features:**
 - Automatic version detection (major/minor/patch)
 - Conventional Commits parsing

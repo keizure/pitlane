@@ -2,13 +2,13 @@ name: Tests
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ master ]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
-  test:
+  full_test:
     runs-on: ubuntu-latest
 
     steps:
