@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "pitlane",
+      "name": "pit",
       "source": {
         "source": "url",
         "url": "https://github.com/keizure/pitlane.git"

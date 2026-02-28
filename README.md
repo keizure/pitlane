@@ -13,7 +13,7 @@ The easiest way to use this repo - install as a Claude Code plugin:
 /plugin marketplace add keizure/pitlane
 
 # Install the plugin
-/plugin install pitlane@pitlane
+/plugin install pit@pitlane
 ```
 
 Once installed, the skills will be available in your Claude Code sessions.
