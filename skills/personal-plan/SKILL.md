@@ -114,40 +114,6 @@ Use these markers at the start of a line:
 - `chore` - maintenance tasks
 - `test` - testing work
 
-**Attributes**:
-- `urgent` - high priority
-- `blocked` - blocked by something
-- `idea` - idea or thought
-- `research` - research work
-- `troubleshooting` - debugging/problem solving
-- `code-review` - code review task
-
-**Domains**:
-- `frontend` - frontend work
-- `backend` - backend work
-- `devops` - DevOps/infrastructure
-- `design` - design work
-- `ui` - UI related
-
-### Tag Detection Algorithm
-
-When user captures an entry:
-
-1. **Extract manual tags**: Find all `#tag` patterns in user's message
-2. **Auto-detect project**: Scan for known project names (pitlane, livery-cv, etc.)
-3. **Auto-detect type**: Identify keywords:
-   - "修复", "fix", "bug" → `bug`
-   - "添加", "新增", "add", "feature" → `feature`
-   - "文档", "docs", "documentation" → `docs`
-   - "重构", "refactor" → `refactor`
-   - "想法", "idea", "思考" → `idea`
-4. **Auto-detect domain**: Identify technical terms:
-   - "前端", "frontend", "UI" → `frontend`
-   - "后端", "backend", "API" → `backend`
-   - "MCP", "server" → `mcp`
-5. **Merge and dedupe**: Combine manual + auto tags, remove duplicates
-6. **Order tags**: Project first, then type, then attributes
-
 ### Tag Examples
 
 ```markdown
@@ -238,11 +204,6 @@ If not, create new section at the top of the file.
 
 Place new entry in appropriate section with correct marker and tags.
 
-**Examples**:
-- User: "记下来 #bug 修复了登录问题" + mentions "pitlane" → `* [pitlane, bug] 修复了登录问题`
-- User: "想法：改进 MCP 架构" → `* [mcp, idea] 改进 MCP 架构`
-- User: "#urgent #frontend 完成 livery-cv 的响应式布局" → `* [livery-cv, frontend, urgent] 完成响应式布局`
-
 ### Step 5 — Write back
 Save the updated content.
 
@@ -286,13 +247,6 @@ For each todo item, add with `?` marker.
 
 ### Step 4 — Link to context
 If related to existing work, reference the project.
-
-## Integration with Notion (Optional)
-
-If user mentions Notion content:
-1. Don't auto-migrate everything
-2. Suggest: "Add link to Notion page in .plan"
-3. Use .plan as index/pointer to Notion when needed
 
 **Example**:
 ```markdown
@@ -364,37 +318,7 @@ If cannot write to file:
 2. Suggest alternative location
 3. Never fail silently
 
-## Output Examples
-
-### After capturing:
-```
-✓ Added to ~/.plan/daily.plan
-
-## 2026-02-27
-* [pitlane, feature] 创建 personal-plan 技能
-  Tags: pitlane (auto), feature (auto)
-```
-
-### After capturing with manual tags:
-```
-✓ Added to ~/.plan/daily.plan
-
-## 2026-02-28
-* [livery-cv, bug, urgent] 修复语言切换器移动端显示问题
-  Tags: livery-cv (auto), bug (manual #bug), urgent (manual #urgent)
-```
-
-### After review:
-```
-Today (2026-02-27):
-- ✓ Completed: 2 items
-  - Created personal-plan skill for pitlane
-  - Fixed translation bug in lianshan-agents
-- ⏸ Postponed: Notion migration (too time-consuming)
-- 💡 Ideas: Use MCP for translation quality checks
-```
-
-## Anti-Patterns (Don't Do)
+## **DO NOT**
 
 - ❌ Creating complex folder hierarchies upfront
 - ❌ Asking too many questions before capturing
@@ -403,36 +327,3 @@ Today (2026-02-27):
 - ❌ Migrating all Notion content at once
 - ❌ Creating the file without asking user
 - ❌ Losing or corrupting existing entries
-
-## Extending the System (Future)
-
-Once user has consistent daily.plan usage for 2+ weeks, consider:
-- Weekly auto-summary script
-- Project extraction to `projects/*.md`
-- Archiving old entries
-- Search/grep helpers
-- RSS feed generation (like original .plan)
-
-But don't implement these upfront. Let the need emerge naturally.
-
----
-
-## Success Metrics
-
-The skill is working well if:
-- User can capture thoughts in < 30 seconds
-- No questions about "which file" or "what format"
-- User naturally starts using it daily
-- Information feels organized without manual effort
-- User prefers this over scattered note systems
-
----
-
-## Quick Reference
-
-| User says | Action |
-|-----------|--------|
-| 记下来/log this | Add to daily.plan with appropriate marker |
-| 今天做了什么/what did I do | Review today's section |
-| 计划明天/plan tomorrow | Create tomorrow's section with todos |
-| 这周做了什么/weekly review | Summarize last 7 days |
