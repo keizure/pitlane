@@ -1,5 +1,5 @@
 # pitlane
-Production-ready agents, skills, hooks, commands, rules of intensive daily use building real products.
+A collection of practical Claude Code skills for daily development workflow - semantic versioning, work logging, and productivity automation.
 
 ## Installation
 
