@@ -80,17 +80,106 @@ Use these markers at the start of a line:
 - `?` - Todo / Question (待办/疑问)
 - `+` - Fixed / Resolved (已修复)
 - `~` - Abandoned / Postponed (放弃/延后)
-- `[project]` - Project tag (项目标签)
+- `[tag1, tag2, ...]` - Multi-tag system (标签系统)
 - `---` - Topic separator (话题分隔)
+
+## Tag System
+
+### Tag Format
+- **Single tag**: `[project]` or `[bug]` or `[feature]`
+- **Multiple tags**: `[project, bug, urgent]` or `[livery-cv, frontend, ui]`
+- **User manual tags**: User says "#bug #urgent" → record as `[bug, urgent]`
+- **Auto-detect tags**: If user mentions project names, auto-add corresponding tags
+
+### Tag Rules
+1. **Manual tags first**: User's explicit `#tag` must be preserved
+2. **Auto-detect supplement**: If no manual tags, Claude auto-detects and adds
+3. **Tag order**: `[project, type, attribute]` - project > type > attribute
+4. **Lowercase with hyphens**: Use lowercase and hyphens (e.g., `livery-cv`)
+5. **No duplicates**: Remove duplicate tags when merging manual + auto tags
+
+### Common Tags Reference
+
+**Projects** (auto-detect from mentions):
+- `pitlane` - pitlane plugin project
+- `livery-cv` - livery-cv resume project
+- `lianshan-agents` - lianshan-agents translation project
+- `mcp` - MCP server related work
+
+**Types**:
+- `feature` - new feature development
+- `bug` - bug fix
+- `docs` - documentation
+- `refactor` - code refactoring
+- `chore` - maintenance tasks
+- `test` - testing work
+
+**Attributes**:
+- `urgent` - high priority
+- `blocked` - blocked by something
+- `idea` - idea or thought
+- `research` - research work
+- `troubleshooting` - debugging/problem solving
+- `code-review` - code review task
+
+**Domains**:
+- `frontend` - frontend work
+- `backend` - backend work
+- `devops` - DevOps/infrastructure
+- `design` - design work
+- `ui` - UI related
+
+### Tag Detection Algorithm
+
+When user captures an entry:
+
+1. **Extract manual tags**: Find all `#tag` patterns in user's message
+2. **Auto-detect project**: Scan for known project names (pitlane, livery-cv, etc.)
+3. **Auto-detect type**: Identify keywords:
+   - "修复", "fix", "bug" → `bug`
+   - "添加", "新增", "add", "feature" → `feature`
+   - "文档", "docs", "documentation" → `docs`
+   - "重构", "refactor" → `refactor`
+   - "想法", "idea", "思考" → `idea`
+4. **Auto-detect domain**: Identify technical terms:
+   - "前端", "frontend", "UI" → `frontend`
+   - "后端", "backend", "API" → `backend`
+   - "MCP", "server" → `mcp`
+5. **Merge and dedupe**: Combine manual + auto tags, remove duplicates
+6. **Order tags**: Project first, then type, then attributes
+
+### Tag Examples
+
+```markdown
+## 2026-02-28
+
+* [pitlane, docs] 添加 CLAUDE.md 版本管理规则
+  User said: "记下来，添加了版本管理规则 #docs"
+
+* [livery-cv, bug, urgent] 修复语言切换器在移动端的显示问题
+  User said: "#bug #urgent 修复了 livery-cv 的切换器问题"
+
+* [mcp, troubleshooting] 解决 Chrome DevTools 连接问题
+  User said: "记下来，解决了 MCP 连接问题"
+  (auto-detected: mcp, troubleshooting)
+
+? [lianshan-agents, code-review] review 翻译 agent MR#4
+  User said: "待办：review lianshan-agents 的 MR#4"
+  (auto-detected: lianshan-agents, code-review)
+
+* [idea] 用 Claude Code 技能系统管理个人知识
+  User said: "想法：用 Claude 管理知识"
+  (auto-detected: idea)
+```
 
 **Example daily.plan**:
 ```markdown
 ## 2026-02-27
 
 * 看了 .plan 文章，很有启发
-? 设计个人信息系统
-* [pitlane] 创建 personal-plan 技能
-~ Notion 笔记整理（太耗时，延后）
+? [idea] 设计个人信息系统
+* [pitlane, feature] 创建 personal-plan 技能
+~ [notion] 笔记整理（太耗时，延后）
 
 ---
 
@@ -101,8 +190,8 @@ Use these markers at the start of a line:
 
 ## 2026-02-26
 
-* [lianshan-agents] 修复翻译 bug
-? 研究 LangGraph 架构
+* [lianshan-agents, bug] 修复翻译 bug
+? [research] 研究 LangGraph 架构
 ```
 
 ## Default File Location
@@ -135,9 +224,24 @@ Check if today's date section exists (format: `## YYYY-MM-DD`)
 If not, create new section at the top of the file.
 
 ### Step 4 — Add new entry
-Place new entry in appropriate section with correct marker.
 
-If user mentioned a project, add `[project-name]` prefix.
+**Tag Processing**:
+1. Extract manual tags from user's message (all `#tag` patterns)
+2. Auto-detect tags based on:
+   - Project mentions (pitlane, livery-cv, lianshan-agents, mcp)
+   - Type keywords (bug, feature, docs, refactor, idea, research)
+   - Domain keywords (frontend, backend, ui, devops)
+   - Action words (troubleshooting, code-review, blocked, urgent)
+3. Merge manual + auto tags, remove duplicates
+4. Order tags: `[project, type, attribute]`
+5. Format as `[tag1, tag2, tag3]` if multiple tags exist
+
+Place new entry in appropriate section with correct marker and tags.
+
+**Examples**:
+- User: "记下来 #bug 修复了登录问题" + mentions "pitlane" → `* [pitlane, bug] 修复了登录问题`
+- User: "想法：改进 MCP 架构" → `* [mcp, idea] 改进 MCP 架构`
+- User: "#urgent #frontend 完成 livery-cv 的响应式布局" → `* [livery-cv, frontend, urgent] 完成响应式布局`
 
 ### Step 5 — Write back
 Save the updated content.
@@ -205,16 +309,24 @@ User: "记下来：用 MCP 做翻译质量检查"
 
 Response:
 - Read daily.plan
-- Add under today's date
-- Use plain text (no marker) or `想法:` prefix
+- Extract tags: auto-detect `mcp`, `idea`
+- Add under today's date with tags: `* [mcp, idea] 用 MCP 做翻译质量检查`
 
-### Case 2: Log completed work
-User: "今天完成了翻译系统的上下文功能"
+### Case 2: Log completed work with manual tags
+User: "今天完成了翻译系统的上下文功能 #feature"
 
 Response:
 - Read daily.plan
-- Add with `*` marker
-- Include project tag if applicable
+- Extract tags: manual `feature`, auto-detect `lianshan-agents` (if mentioned in context)
+- Add with `*` marker: `* [lianshan-agents, feature] 完成翻译系统的上下文功能`
+
+### Case 3: Multiple manual tags
+User: "#bug #urgent 修复了 livery-cv 的语言切换器"
+
+Response:
+- Read daily.plan
+- Extract tags: manual `bug`, `urgent`, auto-detect `livery-cv`
+- Add: `* [livery-cv, bug, urgent] 修复语言切换器`
 
 ### Case 3: Daily review
 User: "今天做了什么"
@@ -259,7 +371,17 @@ If cannot write to file:
 ✓ Added to ~/.plan/daily.plan
 
 ## 2026-02-27
-* [pitlane] 创建 personal-plan 技能
+* [pitlane, feature] 创建 personal-plan 技能
+  Tags: pitlane (auto), feature (auto)
+```
+
+### After capturing with manual tags:
+```
+✓ Added to ~/.plan/daily.plan
+
+## 2026-02-28
+* [livery-cv, bug, urgent] 修复语言切换器移动端显示问题
+  Tags: livery-cv (auto), bug (manual #bug), urgent (manual #urgent)
 ```
 
 ### After review:
