@@ -1,6 +1,6 @@
 ---
 name: personal-plan
-description: "Personal information capture and daily planning system based on .plan file format. Use when: (1) Recording daily work/ideas, (2) Capturing thoughts quickly, (3) Reviewing progress, (4) Organizing scattered information. Triggers: '记下来', '今天做了什么', '想法', 'capture', 'log today', 'what did I do', 'plan review'."
+description: "Personal information capture and daily planning system based on .plan file format. Use when: (0) User call personal-plan, (1) Recording daily work/ideas, (2) Capturing thoughts quickly, (3) Reviewing progress, (4) Organizing scattered information. Triggers: '记下来', '今天做了什么', '想法', 'capture', 'log today', 'what did I do', 'plan review'."
 disable-model-invocation: false
 ---
 

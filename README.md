@@ -47,7 +47,7 @@ Personal information capture and daily planning system based on .plan file forma
 ```
 
 **Features:**
-- Simple .plan file format (inspired by John Carmack's workflow)
+- Simple .plan file format (inspired by [Matteo Landi's .plan revival](https://matteolandi.net/plan-files.html))
 - Daily work logging with minimal syntax
 - Quick idea capture without context switching
 - Project tagging and progress tracking
