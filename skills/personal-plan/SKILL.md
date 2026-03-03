@@ -1,6 +1,6 @@
 ---
 name: personal-plan
-description: "Personal information capture and daily planning system based on .plan file format. Use when: (0) User call personal-plan, (1) Recording daily work/ideas, (2) Capturing thoughts quickly, (3) Reviewing progress, (4) Organizing scattered information. Triggers: '记下来', '今天做了什么', '想法', 'capture', 'log today', 'what did I do', 'plan review'."
+description: "Personal information capture and daily planning system based on .plan file format. Use when: (0) User call personal-plan, (1) Recording daily work/ideas, (2) Capturing thoughts quickly, (3) Reviewing progress, (4) Organizing scattered information, (5) Syncing to remote. Triggers: '记下来', '今天做了什么', '想法', 'capture', 'log today', 'what did I do', 'plan review', 'sync plan', '同步计划'."
 disable-model-invocation: false
 ---
 
@@ -35,6 +35,10 @@ The system uses a single daily log file with optional topic files:
 ├── projects/           # Project-specific notes (optional)
 └── archive/            # Archived content (optional)
 ```
+
+**Git Sync Support**:
+- If `~/.plan` is a symlink pointing to a git repository (e.g., `~/dotplan/.plan`), the system will automatically commit changes after each write
+- Users can manually sync to remote using "sync plan" or "同步计划" triggers
 
 ## Core Workflow
 
@@ -71,6 +75,17 @@ The system uses a single daily log file with optional topic files:
 2. Add tomorrow's date section
 3. Add todo items with `?` marker
 4. Optionally link to projects
+
+### When user wants to SYNC (同步)
+
+**Triggers**: "sync plan", "同步计划", "同步 plan", "push plan"
+
+**Actions**:
+1. Check if ~/.plan is in a git repository
+2. Pull latest changes: `git pull --rebase`
+3. Commit any local changes: `git commit -m "docs(plan): sync at $(date)"`
+4. Push to remote: `git push`
+5. Report sync status to user
 
 ## Syntax (Minimal Markers)
 
@@ -209,7 +224,27 @@ Save the updated content.
 
 **Important**: Use exact format, preserve all existing content.
 
-### Step 6 — Confirm
+### Step 6 — Auto commit (if in git repo)
+After writing the file, check if it's in a git repository:
+
+```bash
+# Check if ~/.plan is a symlink to a git repo
+PLAN_DIR=$(dirname $(readlink -f ~/.plan/daily.plan) 2>/dev/null || echo ~/.plan)
+GIT_DIR=$(cd "$PLAN_DIR/.." && git rev-parse --git-dir 2>/dev/null)
+
+if [ -n "$GIT_DIR" ]; then
+  cd "$PLAN_DIR/.."
+  git add .plan/daily.plan
+  git commit -m "docs(plan): update at $(date +%H:%M)" --quiet
+fi
+```
+
+This ensures:
+- Changes are committed locally (fast, no network)
+- Full local history is preserved
+- User can push manually or use sync command
+
+### Step 7 — Confirm
 Show what was added to the user.
 
 ## Phase 2 — Review
@@ -297,6 +332,19 @@ Response:
 - Read last 7 days
 - Collect all `?` items
 - Optionally create weekly summary
+
+### Case 5: Sync to remote
+User: "同步计划" or "sync plan"
+
+Response:
+1. Check git repository status
+2. Pull latest changes with rebase
+3. Commit local changes if any
+4. Push to remote
+5. Report result:
+   - Success: "✅ Synced to GitHub"
+   - Conflicts: Guide user to resolve
+   - No changes: "Already up to date"
 
 ## Error Handling
 
