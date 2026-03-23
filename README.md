@@ -3,10 +3,9 @@ A collection of practical Claude Code skills for daily development workflow - se
 
 ## Installation
 
-### Install as Plugin (Recommended)
+### Install as Claude Code Plugin
 
-The easiest way to use this repo - install as a Claude Code plugin:
-
+Install the entire plugin to get all skills:
 
 ```bash
 # Add this repo as a marketplace
@@ -16,7 +15,19 @@ The easiest way to use this repo - install as a Claude Code plugin:
 /plugin install pit@pitlane
 ```
 
-Once installed, the skills will be available in your Claude Code sessions.
+Once installed, all skills will be available in your Claude Code sessions.
+
+### Install Individual Skills
+
+Install only the skills you need:
+
+```bash
+# General format
+npx skills add keizure/pitlane --path skills/<skill-name>
+
+# Examples
+npx skills add keizure/pitlane --path skills/personal-plan
+```
 
 ## Available Skills
 
