@@ -1,28 +1,10 @@
 # pitlane
-A collection of practical Claude Code skills for daily development workflow - semantic versioning, work logging, and productivity automation.
+A collection of practical skills for daily development workflow - semantic versioning, work logging, and productivity automation.
 
-## Installation
-
-### Install as Claude Code Plugin
-
-Install the entire plugin to get all skills:
+## Quick Start
+Install any skill with:
 
 ```bash
-# Add this repo as a marketplace
-/plugin marketplace add keizure/pitlane
-
-# Install the plugin
-/plugin install pit@pitlane
-```
-
-Once installed, all skills will be available in your Claude Code sessions.
-
-### Install Individual Skills
-
-Install only the skills you need:
-
-```bash
-# General format
 npx skills add keizure/pitlane --skill <skill-name>
 
 # Examples
@@ -30,9 +12,16 @@ npx skills add keizure/pitlane --skill release-tag
 npx skills add keizure/pitlane --skill personal-plan
 ```
 
+Then invoke in your agent terminal:
+
+```bash
+/release-tag     # Create semantic version tags
+/personal-plan   # Capture daily work and ideas
+```
+
 ## Available Skills
 
-### `release-tag`
+### [`release-tag`](skills/release-tag/SKILL.md)
 Intelligent semantic versioning and git tag creation with automatic version bump detection.
 
 **Usage:**
@@ -44,7 +33,7 @@ Intelligent semantic versioning and git tag creation with automatic version bump
 "Please help me create a release tag"
 ```
 
-### `personal-plan`
+### [`personal-plan`](skills/personal-plan/SKILL.md)
 Personal information capture and daily planning system based on .plan file format.
 
 **Usage:**
@@ -77,42 +66,6 @@ Personal information capture and daily planning system based on .plan file forma
 - Project tagging and progress tracking
 - Review and planning helpers
 
-See [skills/personal-plan/SKILL.md](skills/personal-plan/SKILL.md) for detailed documentation.
-
-## Development
-
-### Testing
-
-This project includes comprehensive tests to ensure quality.
-
-```bash
-# Run all tests
-cd tests
-./run_tests.sh
-
-# Run integration tests
-./tests/integration/test_release_tag.sh
-
-# Set up manual test fixtures
-cd tests/fixtures/basic
-./setup.sh
-# Now test the skill in Claude Code
-```
-
-See [tests/README.md](tests/README.md) for detailed testing documentation and [VALIDATION.md](VALIDATION.md) for quick validation guide.
-
-### Contributing
-
-We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
-- Development setup
-- Making changes
-- Testing requirements
-- Pull request process
-
----
-
 ## License
 
-MIT - Use freely, modify as needed, contribute back if you can.
-
----
+MIT
