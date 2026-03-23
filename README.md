@@ -23,10 +23,11 @@ Install only the skills you need:
 
 ```bash
 # General format
-npx skills add keizure/pitlane --path skills/<skill-name>
+npx skills add keizure/pitlane --skill <skill-name>
 
 # Examples
-npx skills add keizure/pitlane --path skills/personal-plan
+npx skills add keizure/pitlane --skill release-tag
+npx skills add keizure/pitlane --skill personal-plan
 ```
 
 ## Available Skills
@@ -52,9 +53,21 @@ Personal information capture and daily planning system based on .plan file forma
 /personal-plan
 
 # Or mention it in conversation:
+# Capture (记录)
+"Log this: completed the translation system today"
 "记下来：今天完成了翻译系统"
+
+# Review (回顾)
+"What did I do today"
 "今天做了什么"
-"查看我的 plan"
+
+# Plan (计划)
+"Plan tomorrow: review the translation agent code"
+"明天做什么：review 翻译 agent 代码"
+
+# Sync (同步)
+"Sync plan"
+"同步计划"
 ```
 
 **Features:**
